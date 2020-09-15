@@ -4,7 +4,7 @@ from src.ReplyTryRun import TryRun
 from src import GlobalSet
 
 @TryRun
-def SendMsg(target,Text='',ImageUrl='',ImageID='',AtID='',mode=False,targetType='Group'):
+def SendMsg(target,Text='',ImageUrl='',ImageID='',AtID='',msgChain='',mode=False,targetType='Group',AtAll=False):
 
     from requests import post
     from json import loads,dumps
@@ -26,9 +26,11 @@ def SendMsg(target,Text='',ImageUrl='',ImageID='',AtID='',mode=False,targetType=
     if mode:
         msg={
                 'sessionKey':GlobalSet.sessionKey,
+		'target':target,
                 'group':target,
-                'urls':[ImageUrl]
+                'urls':[ImageUrl,]
                 }
+        print(msg)
         a=post(URL+UrlTail,dumps(msg))
         return a.text
     else:
@@ -37,6 +39,12 @@ def SendMsg(target,Text='',ImageUrl='',ImageID='',AtID='',mode=False,targetType=
                 'target':target,
                 'messageChain':[]
                 }
+        if AtAll:
+            if targetType!='Group':
+                raise Exception('Wrong!\nYou must send GROUP message if you want to use function AtAll')
+            msg['messageChain'].append({
+                'type':'AtAll'
+                })
         if ImageID:
             msg['messageChain'].append({
                 'type':'Image',
@@ -57,6 +65,10 @@ def SendMsg(target,Text='',ImageUrl='',ImageID='',AtID='',mode=False,targetType=
                 'type':'Plain',
                 'text':Text
                 })
+        if msgChain:
+            msg['messageChain']=msgChain
+
         if len(msg['messageChain'])<1:
             raise Exception('错误!消息链为空，请检查参数')
+        print(msg)
         post(URL+UrlTail,dumps(msg))

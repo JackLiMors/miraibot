@@ -6,7 +6,7 @@ from src import GlobalSet
 @TryRun
 def Access(target,App='',mode='check',status=''):
     path='src/Cache/'
-    from os import listdir.mkdir
+    from os import listdir,mkdir
     from json import loads,dumps
     from copy import deepcopy
     
@@ -18,7 +18,8 @@ def Access(target,App='',mode='check',status=''):
             'PicMark':True,
             'PSetu':True,
             'Reply':True,
-            'ZhaoXin':False
+            'ZhaoXin':False,
+            'TimeSend':False
             }
     
     if 'Cache' not in listdir('src'):
@@ -45,12 +46,25 @@ def Access(target,App='',mode='check',status=''):
         if target not in GlobalSet.GroupAccess:
             print('\nQQ群'+target+'无配置，使用默认设置生成\n****************\n')
             GlobalSet.GroupAccess[target]=deepcopy(template)
+            with open(path+'GroupAccess','w') as f:
+                f.write(dumps(GlobalSet.GroupAccess))
+        templatekey=set(template.keys())
+        groupkey=set(GlobalSet.GroupAccess[target].keys())
+        a=templatekey^groupkey
+        if a:
+            for i in list(a):
+                if i in GlobalSet.GroupAccess[target]:
+                    GlobalSet.GroupAccess[target].pop(i)
+                else:
+                    GlobalSet.GroupAccess[target][i]=template[i]
         if mode=='check':
             return GlobalSet.GroupAccess[target][App]
         elif mode=='set':
             if type(status)!=bool:
                 raise Exception('错误的参数 status:',status)
             GlobalSet.GroupAccess[target][App]=status
+            with open(path+'GroupAccess','w') as f:
+                f.write(dumps(GlobalSet.GroupAccess))
             return '设置成功'
         elif mode=='status':
             text=''
@@ -59,6 +73,8 @@ def Access(target,App='',mode='check',status=''):
             return text.strip('\n')
         else:
             raise Exception('错误的参数 mode:'+mode)
+        with open(path+'GroupAccess','w') as f:
+            f.write(dumps(GlobalSet.GroupAccess))
     else:
         if mode=='check':
             if target in GlobalSet.SenderAccess:
@@ -87,4 +103,4 @@ def Access(target,App='',mode='check',status=''):
                 else:
                     return '目标无权限'
         else:
-            raise Exception('错误的参数 mode'+mode)
+            raise Exception('错误的参数 mode:'+mode)

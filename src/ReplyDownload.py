@@ -17,10 +17,11 @@ def Download(name,path,msgID='',msg=''):
     from os import listdir,mkdir
     from json import loads
 
+    msgID=str(msgID)
     if 'Download' not in listdir('src'):
         print('\n初始化下载目录\n*********************\n')
         mkdir('src/Download')
-    if path not in listdir('src/Download/'+path):
+    if path not in listdir('src/Download/'):
         mkdir('src/Download/'+path)
     
     if msgID:
@@ -28,17 +29,16 @@ def Download(name,path,msgID='',msg=''):
         msg=loads(get(URL).text)
         if msg['code']==5:
             return '未找到指定聊天记录\n可能是因为期间机器人进行了重启，或者消息丢失导致的'
-        Url=msg['messageChain'][1]['url']
-        ImageID=msg['messageChain'][1]['imageId']
-        if ImageIDList not in dir(GlobalSet):
+        Url=msg['data']['messageChain'][1]['url']
+        ImageID=msg['data']['messageChain'][1]['imageId']
+        if 'ImageIDList' not in dir(GlobalSet):
             GlobalSet.ImageIDList={}
-        GlobalSet.ImageIDList[name]=ImageIDList
-        try:
-            with open('src/Download/'+path+'/'+name,'wb') as f:
-                f.write(get(Url,headers=Header).content)
-            return '下载成功'
-        except Exception:
-            return '下载失败'
+        GlobalSet.ImageIDList[name]=ImageID
+        if path not in listdir('/var/www/html/Download/'):
+            mkdir('/var/www/html/Download/'+path)
+        #with open('/var/www/html/Download/'+path+'/'+name,'wb') as f:
+        #    f.write(get(Url,headers=Header).content)
+        return '下载成功'
     else:
         for i in msg['messageChain']:
             if 'url' in i:
@@ -46,8 +46,8 @@ def Download(name,path,msgID='',msg=''):
                 imageid=i['imageId']
                 break
         try:
-            with open('src/Download/'+path+'/'+name,'wb') as f:
-                f.write(get(url,headers=Header).content)
+            #with open('/var/www/html/Download/'+path+'/'+name,'wb') as f:
+            #    f.write(get(url,headers=Header).content)
             GlobalSet.ImageIDList[name]=imageid
             return '下载成功'
         except Exception:
