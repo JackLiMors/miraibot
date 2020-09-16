@@ -12,12 +12,12 @@ tmux
 
 下面的代码都在tmux中执行
 ```
-ctrl+B % #分出两个屏幕
-./miraiOK_linux_amd64 #运行miraiOK一键配置脚本，记下http-apt插件给出的authKey
-login QQ号 密码 #登陆QQ
-ctrl+B ↓ #切换到另一个分屏
-./BotReply #运行脚本
-ctrl+B D #分离终端
+ctrl+B %		#分出两个屏幕
+./miraiOK_linux_amd64 	#运行miraiOK一键配置脚本，记下http-apt插件给出的authKey
+login QQ号 密码 	#登陆QQ
+ctrl+B ↓ 		#切换到另一个分屏
+./BotReply 		#运行脚本
+ctrl+B D 		#分离终端
 ```
 
 ## 已经写出的功能
