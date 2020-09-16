@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+#下载模块，保存图片imageID并返回imageID，下载实体文件取消相关注释即可
 from src.ReplyTryRun import TryRun
 from src import GlobalSet
 

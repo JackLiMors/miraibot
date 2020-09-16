@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+#该函数是一个装饰器，每个新模块建议都引入并加装，防止意料之外的错误导致进程停止
 from traceback import format_exc
 from src import GlobalSet
 

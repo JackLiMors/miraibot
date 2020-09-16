@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+#和风天气模块，通过API获取实时天气，通过正则检查输入参数
 from src.ReplyTryRun import TryRun
 from src import GlobalSet
 
@@ -12,7 +12,7 @@ def Weather(name):
     from time import time
 
     Re=compile(r'[^\u4e00-\u9fa5]+')
-    KEY='55bdf6a840b04480b1bd472db27bfd86'
+    KEY='这里是API KEY，请替换为你自己的'
 
     if Re.search(name):
         return '参数错误，仅支持中文名称'

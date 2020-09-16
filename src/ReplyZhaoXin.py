@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+#多火用招新模块，请将文本消息和群组QQ替换为你自己的招新群
 from src.ReplyTryRun import TryRun
 from src.ReplyJudge import Judge
 from src import GlobalSet

@@ -1,5 +1,6 @@
 #-*- coding:utf-8 -*-
-
+#图片模块，包括随机发送和指定发送、保存图片，这个模块写的有些混乱：
+#原本通过nginx和本地url发送，后来改为imageID发送之后，文件的路径改混乱了
 from src.ReplyTryRun import TryRun
 from src.ReplyDownload import Download
 from src.ReplySendMsg import SendMsg

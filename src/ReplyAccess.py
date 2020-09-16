@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+#这个模块用于权限的检查、更改，包括个人op权限和群组功能开关
 from src.ReplyTryRun import TryRun
 from src import GlobalSet
 
@@ -21,7 +21,9 @@ def Access(target,App='',mode='check',status=''):
             'ZhaoXin':False,
             'TimeSend':False
             }
-    
+    if 'src' not in lisdir():
+        mkdir('src')
+        print('\n初始化缓存文件夹')
     if 'Cache' not in listdir('src'):
         mkdir(path)
         print('\n创建缓存文件夹\n*************\n')

@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+#禁言模块，上限三分钟，可更改
 from src.ReplyTryRun import TryRun
 from src import GlobalSet
 

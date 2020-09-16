@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+#消息判断模块，可以判断消息链中是否有对应类型的消息、判断文本消息中是否有相应文字(包括直接判断和正则判断)，mode参数是为了实现某个功能加上的，但是我没写成...
 from src.ReplyTryRun import TryRun
 from src import GlobalSet
 

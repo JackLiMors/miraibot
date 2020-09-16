@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#用来统计指定群组发言人员
 
 from src.ReplyTryRun import TryRun
 from src import GlobalSet

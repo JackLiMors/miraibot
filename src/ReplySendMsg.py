@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+#发送消息模块，发送类型包括文本、图片(url类型、imageID类型)、At消息，mode改为True时将屏蔽AtID代入的QQ号码，改为At全体成员。targetType用来指定消息发给好友、群组还是临时会话
 from src.ReplyTryRun import TryRun
 from src import GlobalSet
 
