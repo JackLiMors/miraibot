@@ -19,7 +19,8 @@ def Access(target,App='',mode='check',status=''):
             'PSetu':True,
             'Reply':True,
             'ZhaoXin':False,
-            'TimeSend':False
+            'TimeSend':False,
+            'NoTalk':True
             }
     if 'src' not in lisdir():
         mkdir('src')
