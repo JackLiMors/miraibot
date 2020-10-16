@@ -212,9 +212,15 @@ def Reply(dmsg):
                 if Judge(dmsg,KeyWords=['#set','TimeSend','open']):
                     SendMsg(target,Text=Access(target,App='TimeSend',mode='set',status=True))
                     return 0
+                if Judge(dmsg,KeyWords=['#set','NoTalk','close']):
+                    SendMsg(target,Text=Access(target,App='NoTalk',mode='set',status=False))
+                    return 0
+                if Judge(dmsg,KeyWords=['#set','NoTalk','open']):
+                    SendMsg(target,Text=Access(target,App='NoTalk',mode='set',status=True))
+                    return 0
 
             #群禁烟
-            if Judge(dmsg,Type='At'):
+            if Judge(dmsg,Type='At') and Access(target,App='NoTalk'):
                 if Judge(dmsg,ReWords=r'上一[\s\S]*杯[\s\S]*茶'):
                     SendMsg(target,Text=NoTalk(dmsg))
                     return 0
@@ -225,7 +231,7 @@ def Reply(dmsg):
                     SendMsg(target,Text=NoTalk(dmsg,level=3))
                     return 0
             #解除禁烟
-            if Judge(dmsg,KeyWords=['下茶']):
+            if Judge(dmsg,Type='At') and Judge(dmsg,KeyWords=['下茶']) and Access(target,App='NoTalk'):
                 SendMsg(target,Text=NoTalk(dmsg,mode='unset'))
                 return 0
             #保存涩图
